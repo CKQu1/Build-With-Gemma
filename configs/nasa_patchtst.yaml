@@ -1,0 +1,41 @@
+data:
+  source: nasa
+  data_dir: data/raw/nasa
+  channel_id: P-1
+  train_fraction: 0.70
+  val_fraction: 0.15
+  test_fraction: 0.15
+  use_official_nasa_test: true
+  sequence_length: 100
+  prediction_horizon: 20
+  stride: 1
+  scaling: standard
+  imputation: interpolate
+model:
+  type: patch_tst
+  d_model: 128
+  n_heads: 4
+  num_layers: 4
+  dropout: 0.1
+  patch_length: 16
+  patch_stride: 8
+  lstm_hidden_size: 128
+  lstm_latent_size: 64
+training:
+  seed: 42
+  batch_size: 128
+  epochs: 30
+  learning_rate: 0.0005
+  weight_decay: 0.0001
+  loss: huber
+  early_stopping_patience: 7
+  num_workers: 0
+  device: auto
+  gradient_clip_norm: 1.0
+detection:
+  threshold_percentile: 99.0
+  min_score_count: 1
+output:
+  root_dir: outputs
+  experiment_name: patchtst_nasa_p1
+

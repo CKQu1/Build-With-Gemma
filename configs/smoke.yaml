@@ -1,0 +1,41 @@
+data:
+  source: synthetic
+  train_fraction: 0.70
+  val_fraction: 0.15
+  test_fraction: 0.15
+  sequence_length: 48
+  prediction_horizon: 12
+  stride: 4
+  scaling: standard
+  imputation: interpolate
+  synthetic_length: 700
+  synthetic_features: 4
+  synthetic_anomaly_fraction: 0.015
+model:
+  type: patch_tst
+  d_model: 32
+  n_heads: 4
+  num_layers: 1
+  dropout: 0.1
+  patch_length: 8
+  patch_stride: 4
+  lstm_hidden_size: 32
+  lstm_latent_size: 16
+training:
+  seed: 42
+  batch_size: 32
+  epochs: 2
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  loss: huber
+  early_stopping_patience: 2
+  num_workers: 0
+  device: auto
+  gradient_clip_norm: 1.0
+detection:
+  threshold_percentile: 98.0
+  min_score_count: 1
+output:
+  root_dir: outputs
+  experiment_name: smoke
+
